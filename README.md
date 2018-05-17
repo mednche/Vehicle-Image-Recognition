@@ -9,7 +9,7 @@ A 'metadata.csv' file is also provided, which contains the labelled make and mod
 
 ## Installing software and libraries
 
-This model is computationally demanding and requires to use TensorFlow on GPU (as opposed to CPU). An NVIDIA graphics card is thus necessary. This model was trained using a GeForce GTX 730 graphics card with XXXX GB of memory.
+This model is computationally demanding and requires to use TensorFlow on GPU (as opposed to CPU). An NVIDIA graphics card is thus necessary. This model was trained using a GeForce GTX 730 graphics card with 2GB of memory. This is a very low amount of bandwidth to run such model - 8GB would be recommended!
 
 I followed [this tutorial](https://www.codingforentrepreneurs.com/blog/install-tensorflow-gpu-windows-cuda-cudnn/) to install TensorFlow. 
 NB: TensorFlow-GPU runs on Python 3.5 (but not for above versions as of 17/05/2018).
