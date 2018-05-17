@@ -3,13 +3,13 @@
 This script trains a convolutional neural network model to recognise a vehicle's make and model. This was done using Google's [Tensorflow](https://www.tensorflow.org/) and [TFlearn](http://tflearn.org/), a deep learning library built on top of Tensorflow. 
 
 ## Dataset
-The dataset for this project was downloaded on [Kaggle](https://www.kaggle.com/c/carvana-image-masking-challenge/data). It contains XXXX vehicle images of identical size. There are a total of XXXX vehicles in the dataset, each of them containing 16 photos of the car, taken from different angles.
+The [dataset] (https://www.kaggle.com/c/6927/download/test.zip) for this project was downloaded on [Kaggle](https://www.kaggle.com/c/carvana-image-masking-challenge/data). It contains XXXX vehicle images of identical size. The dataset is too big to be uploaded on github. There are a total of XXXX different vehicles in the dataset, each of them containing 16 photos of the car, taken from different angles.
 
 A 'metadata.csv' file is also provided, which contains the labelled make and model of each car.
 
 ## Installing software and libraries
 
-This model is computationally demanding and requires to use TensorFlow on GPU (as opposed to CPU). An NVIDIA graphics card is thus necessary. This model was trained using a GeForce GTX 730 graphics card with 2GB of memory. This is a very low amount of bandwidth to run such model - 8GB would be recommended!
+This model is computationally demanding and requires to use TensorFlow on GPU (as opposed to CPU). An NVIDIA graphics card is thus necessary. This model was trained using a GeForce GT 730 graphics card with 2GB of memory. This is a very low amount of bandwidth to run such model - 8GB would be recommended!
 
 I followed [this tutorial](https://www.codingforentrepreneurs.com/blog/install-tensorflow-gpu-windows-cuda-cudnn/) to install TensorFlow. 
 NB: TensorFlow-GPU runs on Python 3.5 (but not for above versions as of 17/05/2018).
@@ -36,8 +36,6 @@ conda install -c anaconda scikit-learn
 ```
 NB: do not use conda forge to install any library (such as scikit-learn) as this will break your Anaconda and will lead to Spyder not working.
 
-KERAS???????
-
 ## Data pre-processing
 
 The images in the dataset are very big (1918 x 1280). This is causing memory issues for the model. The images were thus resized to something more managable that nonetheless allows the visual recognition of a car make and model ( XXXX x XXXX). The top part of the image diosplayuing the name of the used car dealers company was cropped.
@@ -60,3 +58,7 @@ To be clear, one pass = one forward pass + one backward pass (the forward pass a
 ## Improvement
 
 Some make and models of vehicle in the dataset don't have many images to train the model on. A good solution is to use Data Augmentation Techniques. One example of this is to shift a given image left by 1 pixel. To the computer, this shift can be fairly significant in the terms of the pixels in the array. The classification (label) of the image doesn’t change, but the array does. There are many other ways to artificially expand a dataset. Some popular augmentations people use are grayscales, horizontal flips, vertical flips, random crops, color jitters, translations, rotations, and much more.
+
+## Limitations:
+
+Due to the limited available bandwidth on the graphics card used, I have not been able to run the model on the full dataset, which is necessary to obtain good learning performances and subsequent accurate prediction. Given the deadline I was given, I am submitting the current work in progress. However, I am due to receive a powerful grahics card (NVIDIA GeForce 800 Ti) in a few weeks and will then be able to run the network on the full dataset.
