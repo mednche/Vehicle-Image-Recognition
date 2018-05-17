@@ -42,7 +42,7 @@ KERAS???????
 
 The images in the dataset are very big (1918 x 1280). This is causing memory issues for the model. The images were thus resized to something more managable that nonetheless allows the visual recognition of a car make and model ( XXXX x XXXX). The top part of the image diosplayuing the name of the used car dealers company was cropped.
 
-The 
+The labels in the metadat.csv are strings ("Acura", "XXXXX"). These need to be converted to integers for the neural network.
 
 ## Training the network
 
@@ -57,6 +57,6 @@ Neural network terminology:
 To be clear, one pass = one forward pass + one backward pass (the forward pass and backward pass are not counted as two different passes).
 
 
-## Imporovement
+## Improvement
 
 Some make and models of vehicle in the dataset don't have many images to train the model on. A good solution is to use Data Augmentation Techniques. One example of this is to shift a given image left by 1 pixel. To the computer, this shift can be fairly significant in the terms of the pixels in the array. The classification (label) of the image doesn’t change, but the array does. There are many other ways to artificially expand a dataset. Some popular augmentations people use are grayscales, horizontal flips, vertical flips, random crops, color jitters, translations, rotations, and much more.
