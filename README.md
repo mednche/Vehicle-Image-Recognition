@@ -42,7 +42,7 @@ KERAS???????
 
 The images in the dataset are very big (1918 x 1280). This is causing memory issues for the model. The images were thus resized to something more managable that nonetheless allows the visual recognition of a car make and model ( XXXX x XXXX). The top part of the image diosplayuing the name of the used car dealers company was cropped.
 
-The labels in the metadat.csv are strings ("Acura", "XXXXX"). These need to be converted to integers for the neural network.
+The labels in the metadat.csv are strings ("Acura", "TL"). These need to be converted to integers for the neural network.
 
 ## Training the network
 
