@@ -74,6 +74,8 @@ Input -> Conv -> Relu -> Pool -> Conv -> Relu -> Pool -> FullyConnected -> Regre
 To be clear, one pass = one forward pass + one backward pass (the forward pass and backward pass are not counted as two different passes).
 
 ## Visualise the performances of the model using Tensorboard
+
+To run Tensorflow, the following line has to be entered in your terminal:
 ```
 tensorboard --logdir='/tmp/tflearn_logs/HF0NPV/'
 ```
