@@ -65,7 +65,7 @@ To be clear, one pass = one forward pass + one backward pass (the forward pass a
 
 ## Visualise the performances of the model using Tensorboard
 ```
-tensorboard --logdir=''
+tensorboard --logdir='/tmp/tflearn_logs/HF0NPV/'
 ```
 ## Improvement
 
