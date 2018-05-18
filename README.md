@@ -3,16 +3,18 @@
 This script trains a convolutional neural network model to recognise a vehicle's make and model. This was done using Google's [Tensorflow](https://www.tensorflow.org/) and [TFlearn](http://tflearn.org/), a deep learning library built on top of Tensorflow. 
 
 ## Dataset
-The [dataset](https://www.kaggle.com/c/6927/download/test.zip) for this project was downloaded on [Kaggle](https://www.kaggle.com/c/carvana-image-masking-challenge/data). It contains XXXX vehicle images of identical size. The dataset is too big to be uploaded on github. There are a total of XXXX different vehicles in the dataset, each of them containing 16 photos of the car, taken from different angles. An example of two vehicles (with their 16 images each) is provided in this repository.
+The [dataset](https://www.kaggle.com/c/6927/download/test.zip) for this project was downloaded on [Kaggle](https://www.kaggle.com/c/carvana-image-masking-challenge/data). On Kaggle, there are two folders called Train and Test. After checking that there is not overlap between the two datasets, I combined them into one in a folder called 'Merged' in order to increase the training size. See script XXX.py to see how I merged them.
 
-A 'metadata.csv' file is also provided, which contains the labelled make and model of each car.
+The final merged dataset contains **105,152 vehicle images** of identical size (1918 x 1280). The dataset is too big to be uploaded on github. This correspond to a total of **6,572 different vehicles** in the dataset, each of them containing 16 photos of the car, taken from different angles. An example of two vehicles (with their 16 images each) is provided in this repository.
+
+A **'metadata.csv'** file is also provided, which contains the labelled make and model of each car.
 
 ## Installing software and libraries
 
 This model is computationally demanding and requires to use TensorFlow on GPU (as opposed to CPU). An NVIDIA graphics card is thus necessary. This model was trained using a GeForce GT 730 graphics card with 2GB of memory. This is a very low amount of bandwidth to run such model - 8GB would be recommended!
 
 I followed [this tutorial](https://www.codingforentrepreneurs.com/blog/install-tensorflow-gpu-windows-cuda-cudnn/) to install TensorFlow. 
-NB: TensorFlow-GPU runs on Python 3.5 (but not for above versions as of 17/05/2018).
+NB: TensorFlow-GPU runs on **Python 3.5** (but not for above versions as of 17/05/2018).
 
 1. Instal graphics card:
 The first step is to install a graphics card and the corresponding drivers on your computer
