@@ -48,12 +48,12 @@ The labels in the metadat.csv are strings ("Acura", "TL"). These need to be conv
 
 Architecture of the basic model:
 
-Input -> Conv -> Relu -> Pool -> FullyConnected
+Input -> Conv -> Relu -> Pool -> Conv -> Relu -> Pool -> FullyConnected -> Regression
 
-Neural network terminology:
-- one epoch = one forward pass and one backward pass of all the training images
-- batch size = the number of training images in one forward/backward pass. The higher the batch size, the more memory space needed, but it will be faster.
-- number of iterations = number of passes, each pass using [batch size] number of images. 
+**Neural network terminology:**
+- *one epoch* = one forward pass and one backward pass of all the training images
+- *batch size* = the number of training images in one forward/backward pass. The higher the batch size, the more memory space needed, but it will be faster.
+- *number of iterations* = number of passes, each pass using [batch size] number of images. 
 To be clear, one pass = one forward pass + one backward pass (the forward pass and backward pass are not counted as two different passes).
 
 
@@ -64,3 +64,8 @@ Some make and models of vehicle in the dataset don't have many images to train t
 ## Limitations:
 
 Due to the limited available bandwidth on the graphics card used, I have not been able to run the model on the full dataset, which is necessary to obtain good learning performances and subsequent accurate prediction. Given the deadline I was given, I am submitting the current work in progress. However, I am due to receive a powerful grahics card (NVIDIA GeForce 800 Ti) in a few weeks and will then be able to run the network on the full dataset.
+
+overfitting the training samples when the dataset is small (very high training accuracy, low test accuracy). As you grow the dataset size, your classifier starts to generalize better, thus raising the success rate in the test dataset.
+
+Given the small dataset, the model is overfitting the training samples (very high training accuracy, low test accuracy). As I will grow the dataset size, the classifier will hopefully start to generalize better, thus raising the success rate in the test dataset.
+
