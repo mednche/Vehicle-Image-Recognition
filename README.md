@@ -3,7 +3,7 @@
 This script trains a convolutional neural network model to recognise a vehicle's make and model. This was done using Google's [Tensorflow](https://www.tensorflow.org/) and [TFlearn](http://tflearn.org/), a deep learning library built on top of Tensorflow. 
 
 ## Dataset
-The [dataset](https://www.kaggle.com/c/6927/download/test.zip) for this project was downloaded on [Kaggle](https://www.kaggle.com/c/carvana-image-masking-challenge/data). On Kaggle, there are two folders called Train and Test. After checking that there is not overlap between the two datasets, I combined them into one in a folder called 'Merged' in order to increase the training size. See script XXX.py to see how I merged them.
+The [dataset](https://www.kaggle.com/c/6927/download/test.zip) for this project was downloaded on [Kaggle](https://www.kaggle.com/c/carvana-image-masking-challenge/data). On Kaggle, there are two folders called Train and Test. They both have to be unziped before working on them. After checking that there is not overlap between the images in both folders, I combined them into a new single folder called 'Merged' in order to increase the training size. See script ***mergeFolders.py*** to see how I merged them.
 
 The final merged dataset contains **105,152 vehicle images** of identical size (1918 x 1280). The dataset is too big to be uploaded on github. This correspond to a total of **6,572 different vehicles** in the dataset, each of them containing 16 photos of the car, taken from different angles. An example of two vehicles (with their 16 images each) is provided in this repository.
 
@@ -38,9 +38,12 @@ conda install -c anaconda scikit-learn
 ```
 NB: do not use conda forge to install any library (such as scikit-learn) as this will break your Anaconda and will lead to Spyder not working.
 
+
+From here, the next steps are all in the Jupyter notebook called ***ImageRecognition.ipynb*** for which a static version is available in ***ImageRecognition.html***.
+
 ## Data pre-processing
 
-The images in the dataset are very big (1918 x 1280). This is causing memory issues for the model. The images were thus resized to something more managable that nonetheless allows the visual recognition of a car make and model ( XXXX x XXXX). The top part of the image diosplayuing the name of the used car dealers company was cropped.
+The images in the dataset are very big (1918 x 1280). This is causing memory issues for the model. The images were thus resized to something more managable that nonetheless allows the visual recognition of a car make and model (450 x 250). The top part of the image diosplayuing the name of the used car dealers company was cropped.
 
 The labels in the metadat.csv are strings ("Acura", "TL"). These need to be converted to integers for the neural network.
 
