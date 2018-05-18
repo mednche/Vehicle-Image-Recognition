@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>Untitled</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>Image recognition-Copy1</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 <style type="text/css">
@@ -11781,7 +11781,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[97]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
@@ -11821,7 +11821,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[98]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
@@ -11829,9 +11829,10 @@ div#notebook {
 <span class="kn">from</span> <span class="nn">os.path</span> <span class="k">import</span> <span class="n">splitext</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
+<span class="c1"># tensorflow</span>
 <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 
-<span class="c1"># Import tflearn and some helpers</span>
+<span class="c1"># tflearn and some helpers</span>
 <span class="kn">import</span> <span class="nn">tflearn</span>
 <span class="kn">from</span> <span class="nn">tflearn.data_utils</span> <span class="k">import</span> <span class="n">shuffle</span>
 <span class="kn">from</span> <span class="nn">tflearn.layers.core</span> <span class="k">import</span> <span class="n">input_data</span><span class="p">,</span> <span class="n">dropout</span><span class="p">,</span> <span class="n">fully_connected</span>
@@ -11839,35 +11840,20 @@ div#notebook {
 <span class="kn">from</span> <span class="nn">tflearn.layers.estimator</span> <span class="k">import</span> <span class="n">regression</span>
 <span class="kn">from</span> <span class="nn">tflearn.data_preprocessing</span> <span class="k">import</span> <span class="n">ImagePreprocessing</span>
 <span class="kn">from</span> <span class="nn">tflearn.data_augmentation</span> <span class="k">import</span> <span class="n">ImageAugmentation</span>
+
+<span class="c1"># sklearn</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">precision_score</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">,</span> <span class="n">f1_score</span><span class="p">,</span> <span class="n">cohen_kappa_score</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>hdf5 is not supported on this machine (please install/reinstall h5py for optimal experience)
-curses is not supported on this machine (please install/reinstall curses for an optimal experience)
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[99]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;C:/Users/mednche/Desktop/ImageRec/Test&quot;</span><span class="p">)</span>
@@ -11888,11 +11874,11 @@ curses is not supported on this machine (please install/reinstall curses for an 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[100]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Get all files in merged folder</span>
-<span class="n">folder</span> <span class="o">=</span> <span class="s2">&quot;C:/Users/mednche/Desktop/ImageRec/Merged&quot;</span>
+<span class="n">folder</span> <span class="o">=</span> <span class="s2">&quot;C:/Users/mednche/Desktop/ImageRec/Test&quot;</span>
 <span class="n">onlyfiles</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="n">f</span><span class="p">))]</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Working with </span><span class="si">{0}</span><span class="s2"> images&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">onlyfiles</span><span class="p">)))</span>
 
@@ -11929,13 +11915,13 @@ Reduced to 5000 images
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Get-the-labels-associated-with-each-images">Get the labels associated with each images<a class="anchor-link" href="#Get-the-labels-associated-with-each-images">&#182;</a></h3>
+<h3 id="Fetch-the-labels-associated-with-each-images">Fetch the labels associated with each images<a class="anchor-link" href="#Fetch-the-labels-associated-with-each-images">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[101]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">train_files</span> <span class="o">=</span> <span class="p">[]</span>
@@ -11961,7 +11947,7 @@ Reduced to 5000 images
     
     <span class="n">y_train</span> <span class="o">=</span> <span class="n">y_train</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span> <span class="s1">&#39;make&#39;</span><span class="p">:</span><span class="n">make</span><span class="p">,</span> <span class="s1">&#39;model&#39;</span><span class="p">:</span><span class="n">model</span><span class="p">},</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Files in train_files: </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_files</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Files in train_files: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">train_files</span><span class="p">)))</span>
 </pre></div>
 
 </div>
@@ -12005,7 +11991,7 @@ Reduced to 5000 images
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[102]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># number of images per vehicle</span>
@@ -12024,7 +12010,7 @@ Reduced to 5000 images
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[14]:</div>
+<div class="prompt output_prompt">Out[102]:</div>
 
 
 
@@ -12092,7 +12078,7 @@ Reduced to 5000 images
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[103]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># number of images and vehicles</span>
@@ -12126,13 +12112,13 @@ Reduced to 5000 images
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Example-of-an-image-and-its-labels">Example of an image and its labels<a class="anchor-link" href="#Example-of-an-image-and-its-labels">&#182;</a></h3>
+<h4 id="Example-of-an-image-and-its-labels">Example of an image and its labels<a class="anchor-link" href="#Example-of-an-image-and-its-labels">&#182;</a></h4>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="prompt input_prompt">In&nbsp;[104]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Example of the first image...</span>
@@ -12181,7 +12167,7 @@ Use ``imageio.imread`` instead.
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[27]:</div>
+<div class="prompt output_prompt">Out[104]:</div>
 
 
 
@@ -12224,7 +12210,7 @@ Name: 0, dtype: object</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="prompt input_prompt">In&nbsp;[105]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Open the first image (all images have the same size)</span>
@@ -12240,6 +12226,9 @@ Name: 0, dtype: object</pre>
 <span class="c1"># crop</span>
 <span class="n">img</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">crop</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">im</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">im</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
 
+<span class="c1"># show cropped image</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+
 <span class="c1"># get final dimentions of all images</span>
 <span class="n">image_width</span><span class="p">,</span> <span class="n">image_height</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">size</span>
 
@@ -12247,10 +12236,9 @@ Name: 0, dtype: object</pre>
 <span class="n">channels</span> <span class="o">=</span> <span class="mi">3</span>
 
 <span class="c1"># for training on coloured images</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">train_files</span><span class="p">),</span> <span class="n">image_height</span><span class="p">,</span> <span class="n">image_width</span><span class="p">,</span> <span class="n">channels</span><span class="p">),</span>
-                     <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">train_files</span><span class="p">),</span> <span class="n">image_height</span><span class="p">,</span> <span class="n">image_width</span><span class="p">,</span> <span class="n">channels</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
 
-<span class="n">dataset</span>
+<span class="n">dataset</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -12263,7 +12251,7 @@ Name: 0, dtype: object</pre>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[30]:</div>
+<div class="prompt output_prompt">Out[105]:</div>
 
 
 
@@ -12586,7 +12574,7 @@ Name: 0, dtype: object</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="prompt input_prompt">In&nbsp;[106]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
@@ -12608,10 +12596,10 @@ Name: 0, dtype: object</pre>
     <span class="n">dataset</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
     <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
     <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">250</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> images to array&quot;</span> <span class="o">%</span> <span class="n">i</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> images to array&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All images to array!&quot;</span><span class="p">)</span>
 
-<span class="n">dataset</span>
+<span class="n">dataset</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -12653,6 +12641,317 @@ All images to array!
 </div>
 </div>
 
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[106]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([[[[ 238.,  234.,  235.],
+         [ 238.,  234.,  235.],
+         [ 238.,  234.,  235.],
+         ..., 
+         [ 230.,  226.,  223.],
+         [ 230.,  226.,  223.],
+         [ 230.,  226.,  223.]],
+
+        [[ 238.,  234.,  235.],
+         [ 238.,  234.,  235.],
+         [ 238.,  234.,  235.],
+         ..., 
+         [ 229.,  225.,  222.],
+         [ 229.,  225.,  222.],
+         [ 229.,  225.,  222.]],
+
+        [[ 238.,  234.,  235.],
+         [ 238.,  234.,  235.],
+         [ 238.,  234.,  235.],
+         ..., 
+         [ 229.,  225.,  222.],
+         [ 229.,  225.,  222.],
+         [ 229.,  225.,  222.]],
+
+        ..., 
+        [[ 209.,  207.,  215.],
+         [ 212.,  211.,  218.],
+         [ 212.,  211.,  218.],
+         ..., 
+         [ 225.,  221.,  222.],
+         [ 224.,  220.,  221.],
+         [ 224.,  220.,  221.]],
+
+        [[ 212.,  212.,  214.],
+         [ 212.,  212.,  214.],
+         [ 212.,  212.,  214.],
+         ..., 
+         [ 225.,  221.,  222.],
+         [ 225.,  221.,  222.],
+         [ 225.,  221.,  222.]],
+
+        [[ 212.,  212.,  210.],
+         [ 212.,  212.,  210.],
+         [ 212.,  212.,  210.],
+         ..., 
+         [ 235.,  231.,  232.],
+         [ 235.,  231.,  232.],
+         [ 235.,  231.,  232.]]],
+
+
+       [[[ 235.,  235.,  235.],
+         [ 235.,  235.,  235.],
+         [ 235.,  235.,  235.],
+         ..., 
+         [ 231.,  227.,  224.],
+         [ 231.,  227.,  224.],
+         [ 231.,  227.,  224.]],
+
+        [[ 235.,  235.,  235.],
+         [ 235.,  235.,  235.],
+         [ 235.,  235.,  235.],
+         ..., 
+         [ 231.,  227.,  224.],
+         [ 231.,  227.,  224.],
+         [ 231.,  227.,  224.]],
+
+        [[ 237.,  235.,  235.],
+         [ 237.,  235.,  235.],
+         [ 237.,  235.,  235.],
+         ..., 
+         [ 231.,  227.,  224.],
+         [ 231.,  227.,  224.],
+         [ 231.,  227.,  224.]],
+
+        ..., 
+        [[ 210.,  209.,  214.],
+         [ 210.,  209.,  214.],
+         [ 212.,  211.,  216.],
+         ..., 
+         [ 224.,  224.,  224.],
+         [ 224.,  224.,  224.],
+         [ 224.,  224.,  224.]],
+
+        [[ 212.,  211.,  216.],
+         [ 212.,  211.,  216.],
+         [ 212.,  211.,  216.],
+         ..., 
+         [ 224.,  224.,  224.],
+         [ 224.,  224.,  224.],
+         [ 224.,  224.,  224.]],
+
+        [[ 212.,  211.,  216.],
+         [ 212.,  211.,  216.],
+         [ 212.,  211.,  216.],
+         ..., 
+         [ 234.,  234.,  234.],
+         [ 234.,  234.,  234.],
+         [ 234.,  234.,  234.]]],
+
+
+       [[[ 238.,  234.,  235.],
+         [ 238.,  234.,  235.],
+         [ 238.,  234.,  235.],
+         ..., 
+         [ 231.,  227.,  224.],
+         [ 231.,  227.,  224.],
+         [ 231.,  227.,  224.]],
+
+        [[ 238.,  234.,  235.],
+         [ 238.,  234.,  235.],
+         [ 238.,  234.,  235.],
+         ..., 
+         [ 231.,  227.,  224.],
+         [ 231.,  227.,  224.],
+         [ 231.,  227.,  224.]],
+
+        [[ 238.,  234.,  235.],
+         [ 238.,  234.,  235.],
+         [ 238.,  234.,  235.],
+         ..., 
+         [ 231.,  227.,  224.],
+         [ 231.,  227.,  224.],
+         [ 231.,  227.,  224.]],
+
+        ..., 
+        [[ 209.,  207.,  215.],
+         [ 212.,  211.,  218.],
+         [ 212.,  210.,  218.],
+         ..., 
+         [ 221.,  221.,  221.],
+         [ 221.,  222.,  221.],
+         [ 221.,  222.,  221.]],
+
+        [[ 212.,  212.,  214.],
+         [ 212.,  212.,  214.],
+         [ 212.,  212.,  214.],
+         ..., 
+         [ 223.,  223.,  223.],
+         [ 224.,  224.,  224.],
+         [ 224.,  224.,  224.]],
+
+        [[ 212.,  212.,  210.],
+         [ 212.,  212.,  210.],
+         [ 212.,  212.,  210.],
+         ..., 
+         [ 235.,  235.,  235.],
+         [ 234.,  234.,  234.],
+         [ 234.,  234.,  234.]]],
+
+
+       ..., 
+       [[[ 255.,  251.,  252.],
+         [ 255.,  251.,  252.],
+         [ 255.,  251.,  252.],
+         ..., 
+         [ 244.,  236.,  234.],
+         [ 244.,  236.,  234.],
+         [ 244.,  236.,  234.]],
+
+        [[ 255.,  251.,  252.],
+         [ 255.,  251.,  252.],
+         [ 255.,  251.,  252.],
+         ..., 
+         [ 244.,  236.,  234.],
+         [ 244.,  236.,  234.],
+         [ 244.,  236.,  234.]],
+
+        [[ 254.,  252.,  252.],
+         [ 254.,  252.,  252.],
+         [ 254.,  252.,  252.],
+         ..., 
+         [ 244.,  236.,  234.],
+         [ 244.,  236.,  234.],
+         [ 244.,  236.,  234.]],
+
+        ..., 
+        [[ 208.,  201.,  195.],
+         [ 208.,  201.,  195.],
+         [ 209.,  202.,  196.],
+         ..., 
+         [ 206.,  199.,  193.],
+         [ 206.,  199.,  193.],
+         [ 206.,  199.,  193.]],
+
+        [[ 208.,  201.,  195.],
+         [ 208.,  201.,  195.],
+         [ 209.,  202.,  196.],
+         ..., 
+         [ 204.,  197.,  191.],
+         [ 206.,  199.,  193.],
+         [ 206.,  199.,  193.]],
+
+        [[ 208.,  201.,  195.],
+         [ 208.,  201.,  195.],
+         [ 206.,  199.,  193.],
+         ..., 
+         [ 204.,  197.,  191.],
+         [ 206.,  199.,  193.],
+         [ 206.,  199.,  193.]]],
+
+
+       [[[ 252.,  252.,  252.],
+         [ 252.,  252.,  252.],
+         [ 252.,  252.,  252.],
+         ..., 
+         [ 244.,  236.,  234.],
+         [ 244.,  236.,  234.],
+         [ 244.,  236.,  234.]],
+
+        [[ 252.,  252.,  252.],
+         [ 252.,  252.,  252.],
+         [ 252.,  252.,  252.],
+         ..., 
+         [ 244.,  236.,  234.],
+         [ 244.,  236.,  234.],
+         [ 244.,  236.,  234.]],
+
+        [[ 254.,  252.,  252.],
+         [ 254.,  252.,  252.],
+         [ 254.,  252.,  252.],
+         ..., 
+         [ 244.,  236.,  234.],
+         [ 244.,  236.,  234.],
+         [ 244.,  236.,  234.]],
+
+        ..., 
+        [[ 208.,  201.,  195.],
+         [ 208.,  201.,  195.],
+         [ 209.,  202.,  196.],
+         ..., 
+         [ 204.,  197.,  191.],
+         [ 204.,  197.,  191.],
+         [ 204.,  197.,  191.]],
+
+        [[ 208.,  201.,  195.],
+         [ 208.,  201.,  195.],
+         [ 207.,  200.,  194.],
+         ..., 
+         [ 205.,  198.,  192.],
+         [ 204.,  197.,  191.],
+         [ 204.,  197.,  191.]],
+
+        [[ 208.,  201.,  195.],
+         [ 208.,  201.,  195.],
+         [ 204.,  197.,  191.],
+         ..., 
+         [ 203.,  196.,  190.],
+         [ 204.,  197.,  191.],
+         [ 204.,  197.,  191.]]],
+
+
+       [[[ 255.,  251.,  252.],
+         [ 255.,  251.,  252.],
+         [ 255.,  251.,  252.],
+         ..., 
+         [ 244.,  236.,  234.],
+         [ 244.,  236.,  234.],
+         [ 244.,  236.,  234.]],
+
+        [[ 255.,  251.,  252.],
+         [ 255.,  251.,  252.],
+         [ 255.,  251.,  252.],
+         ..., 
+         [ 244.,  236.,  234.],
+         [ 243.,  235.,  233.],
+         [ 243.,  235.,  233.]],
+
+        [[ 254.,  252.,  252.],
+         [ 254.,  252.,  252.],
+         [ 254.,  252.,  252.],
+         ..., 
+         [ 244.,  236.,  234.],
+         [ 243.,  235.,  233.],
+         [ 243.,  235.,  233.]],
+
+        ..., 
+        [[ 208.,  201.,  195.],
+         [ 208.,  201.,  195.],
+         [ 209.,  202.,  196.],
+         ..., 
+         [ 204.,  197.,  191.],
+         [ 204.,  197.,  191.],
+         [ 204.,  197.,  191.]],
+
+        [[ 208.,  201.,  195.],
+         [ 208.,  201.,  195.],
+         [ 207.,  200.,  194.],
+         ..., 
+         [ 204.,  197.,  191.],
+         [ 204.,  197.,  191.],
+         [ 204.,  197.,  191.]],
+
+        [[ 208.,  201.,  195.],
+         [ 208.,  201.,  195.],
+         [ 204.,  197.,  191.],
+         ..., 
+         [ 204.,  197.,  191.],
+         [ 204.,  197.,  191.],
+         [ 204.,  197.,  191.]]]], dtype=float32)</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -12661,13 +12960,13 @@ All images to array!
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Recode-car-labels-(make,-model)-into-numbers-instead-of-strings">Recode car labels (make, model) into numbers instead of strings<a class="anchor-link" href="#Recode-car-labels-(make,-model)-into-numbers-instead-of-strings">&#182;</a></h3>
+<h3 id="Recode-car-labels-(make,-model,-id)-into-numbers-instead-of-strings">Recode car labels (make, model, id) into numbers instead of strings<a class="anchor-link" href="#Recode-car-labels-(make,-model,-id)-into-numbers-instead-of-strings">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="prompt input_prompt">In&nbsp;[107]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Associate each unique make with a number</span>
@@ -12682,15 +12981,23 @@ All images to array!
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">unique_model</span><span class="p">)):</span>
     <span class="n">modeltonumberdict</span><span class="p">[</span><span class="n">unique_model</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">i</span>
 
-<span class="k">def</span> <span class="nf">makeAndModelToNumber</span><span class="p">(</span><span class="n">mydata</span><span class="p">,</span> <span class="n">makedict</span><span class="p">,</span> <span class="n">modeldict</span><span class="p">):</span>
-    <span class="n">mydata_copy</span> <span class="o">=</span> <span class="n">mydata</span>
+<span class="c1"># Associate each unique id string with a number                  </span>
+<span class="n">idtonumberdict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">unique_id</span> <span class="o">=</span> <span class="n">y_train</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span> 
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">unique_id</span><span class="p">)):</span>
+    <span class="n">idtonumberdict</span><span class="p">[</span><span class="n">unique_id</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">i</span>
+
+    
+<span class="k">def</span> <span class="nf">makeAndModelToNumber</span><span class="p">(</span><span class="n">mydata</span><span class="p">,</span> <span class="n">makedict</span><span class="p">,</span> <span class="n">modeldict</span><span class="p">,</span> <span class="n">iddict</span><span class="p">):</span>
+    <span class="n">mydata_copy</span> <span class="o">=</span> <span class="n">mydata</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="c1"># make a copy otherwise the changes are made in both df</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mydata_copy</span><span class="p">[</span><span class="s1">&#39;make&#39;</span><span class="p">])):</span>
         <span class="n">mydata_copy</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s1">&#39;make&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">makedict</span><span class="p">[</span><span class="n">mydata_copy</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s1">&#39;make&#39;</span><span class="p">]]</span>
         <span class="n">mydata_copy</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s1">&#39;model&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">modeldict</span><span class="p">[</span><span class="n">mydata_copy</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s1">&#39;model&#39;</span><span class="p">]]</span>
+        <span class="n">mydata_copy</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">iddict</span><span class="p">[</span><span class="n">mydata_copy</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s1">&#39;name&#39;</span><span class="p">]]</span>
     <span class="k">return</span> <span class="n">mydata_copy</span>
 
-<span class="n">clean_y_train</span> <span class="o">=</span> <span class="n">makeAndModelToNumber</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">maketonumberdict</span><span class="p">,</span> <span class="n">modeltonumberdict</span><span class="p">)</span>
-<span class="n">clean_y_train</span>
+<span class="n">clean_y_train</span> <span class="o">=</span> <span class="n">makeAndModelToNumber</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">maketonumberdict</span><span class="p">,</span> <span class="n">modeltonumberdict</span><span class="p">,</span> <span class="n">idtonumberdict</span><span class="p">)</span>
+<span class="n">clean_y_train</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -12703,7 +13010,7 @@ All images to array!
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[35]:</div>
+<div class="prompt output_prompt">Out[107]:</div>
 
 
 
@@ -12736,181 +13043,181 @@ All images to array!
       <th>0</th>
       <td>0</td>
       <td>0</td>
-      <td>0004d4463b50</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>1</th>
       <td>0</td>
       <td>0</td>
-      <td>0004d4463b50</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>2</th>
       <td>0</td>
       <td>0</td>
-      <td>0004d4463b50</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>3</th>
       <td>0</td>
       <td>0</td>
-      <td>0004d4463b50</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>4</th>
       <td>0</td>
       <td>0</td>
-      <td>0004d4463b50</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>5</th>
       <td>0</td>
       <td>0</td>
-      <td>0004d4463b50</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>6</th>
       <td>0</td>
       <td>0</td>
-      <td>0004d4463b50</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>7</th>
       <td>0</td>
       <td>0</td>
-      <td>0004d4463b50</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>8</th>
       <td>0</td>
       <td>0</td>
-      <td>0004d4463b50</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>9</th>
       <td>0</td>
       <td>0</td>
-      <td>0004d4463b50</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>10</th>
       <td>0</td>
       <td>0</td>
-      <td>0004d4463b50</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>11</th>
       <td>0</td>
       <td>0</td>
-      <td>0004d4463b50</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>12</th>
       <td>0</td>
       <td>0</td>
-      <td>0004d4463b50</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>13</th>
       <td>0</td>
       <td>0</td>
-      <td>0004d4463b50</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>14</th>
       <td>0</td>
       <td>0</td>
-      <td>0004d4463b50</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>15</th>
       <td>0</td>
       <td>0</td>
-      <td>0004d4463b50</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>16</th>
       <td>0</td>
       <td>1</td>
-      <td>00087a6bd4dc</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>17</th>
       <td>0</td>
       <td>1</td>
-      <td>00087a6bd4dc</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>18</th>
       <td>0</td>
       <td>1</td>
-      <td>00087a6bd4dc</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>19</th>
       <td>0</td>
       <td>1</td>
-      <td>00087a6bd4dc</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>20</th>
       <td>0</td>
       <td>1</td>
-      <td>00087a6bd4dc</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>21</th>
       <td>0</td>
       <td>1</td>
-      <td>00087a6bd4dc</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>22</th>
       <td>0</td>
       <td>1</td>
-      <td>00087a6bd4dc</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>23</th>
       <td>0</td>
       <td>1</td>
-      <td>00087a6bd4dc</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>24</th>
       <td>0</td>
       <td>1</td>
-      <td>00087a6bd4dc</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>25</th>
       <td>0</td>
       <td>1</td>
-      <td>00087a6bd4dc</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>26</th>
       <td>0</td>
       <td>1</td>
-      <td>00087a6bd4dc</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>27</th>
       <td>0</td>
       <td>1</td>
-      <td>00087a6bd4dc</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>28</th>
       <td>0</td>
       <td>1</td>
-      <td>00087a6bd4dc</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>29</th>
       <td>0</td>
       <td>1</td>
-      <td>00087a6bd4dc</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>...</th>
@@ -12922,181 +13229,181 @@ All images to array!
       <th>4970</th>
       <td>4</td>
       <td>152</td>
-      <td>0d3adbbc9a8b</td>
+      <td>310</td>
     </tr>
     <tr>
       <th>4971</th>
       <td>4</td>
       <td>152</td>
-      <td>0d3adbbc9a8b</td>
+      <td>310</td>
     </tr>
     <tr>
       <th>4972</th>
       <td>4</td>
       <td>152</td>
-      <td>0d3adbbc9a8b</td>
+      <td>310</td>
     </tr>
     <tr>
       <th>4973</th>
       <td>4</td>
       <td>152</td>
-      <td>0d3adbbc9a8b</td>
+      <td>310</td>
     </tr>
     <tr>
       <th>4974</th>
       <td>4</td>
       <td>152</td>
-      <td>0d3adbbc9a8b</td>
+      <td>310</td>
     </tr>
     <tr>
       <th>4975</th>
       <td>4</td>
       <td>152</td>
-      <td>0d3adbbc9a8b</td>
+      <td>310</td>
     </tr>
     <tr>
       <th>4976</th>
       <td>17</td>
       <td>93</td>
-      <td>0d4668ed98d1</td>
+      <td>311</td>
     </tr>
     <tr>
       <th>4977</th>
       <td>17</td>
       <td>93</td>
-      <td>0d4668ed98d1</td>
+      <td>311</td>
     </tr>
     <tr>
       <th>4978</th>
       <td>17</td>
       <td>93</td>
-      <td>0d4668ed98d1</td>
+      <td>311</td>
     </tr>
     <tr>
       <th>4979</th>
       <td>17</td>
       <td>93</td>
-      <td>0d4668ed98d1</td>
+      <td>311</td>
     </tr>
     <tr>
       <th>4980</th>
       <td>17</td>
       <td>93</td>
-      <td>0d4668ed98d1</td>
+      <td>311</td>
     </tr>
     <tr>
       <th>4981</th>
       <td>17</td>
       <td>93</td>
-      <td>0d4668ed98d1</td>
+      <td>311</td>
     </tr>
     <tr>
       <th>4982</th>
       <td>17</td>
       <td>93</td>
-      <td>0d4668ed98d1</td>
+      <td>311</td>
     </tr>
     <tr>
       <th>4983</th>
       <td>17</td>
       <td>93</td>
-      <td>0d4668ed98d1</td>
+      <td>311</td>
     </tr>
     <tr>
       <th>4984</th>
       <td>17</td>
       <td>93</td>
-      <td>0d4668ed98d1</td>
+      <td>311</td>
     </tr>
     <tr>
       <th>4985</th>
       <td>17</td>
       <td>93</td>
-      <td>0d4668ed98d1</td>
+      <td>311</td>
     </tr>
     <tr>
       <th>4986</th>
       <td>17</td>
       <td>93</td>
-      <td>0d4668ed98d1</td>
+      <td>311</td>
     </tr>
     <tr>
       <th>4987</th>
       <td>17</td>
       <td>93</td>
-      <td>0d4668ed98d1</td>
+      <td>311</td>
     </tr>
     <tr>
       <th>4988</th>
       <td>17</td>
       <td>93</td>
-      <td>0d4668ed98d1</td>
+      <td>311</td>
     </tr>
     <tr>
       <th>4989</th>
       <td>17</td>
       <td>93</td>
-      <td>0d4668ed98d1</td>
+      <td>311</td>
     </tr>
     <tr>
       <th>4990</th>
       <td>17</td>
       <td>93</td>
-      <td>0d4668ed98d1</td>
+      <td>311</td>
     </tr>
     <tr>
       <th>4991</th>
       <td>17</td>
       <td>93</td>
-      <td>0d4668ed98d1</td>
+      <td>311</td>
     </tr>
     <tr>
       <th>4992</th>
       <td>13</td>
       <td>139</td>
-      <td>0d4b67f458bb</td>
+      <td>312</td>
     </tr>
     <tr>
       <th>4993</th>
       <td>13</td>
       <td>139</td>
-      <td>0d4b67f458bb</td>
+      <td>312</td>
     </tr>
     <tr>
       <th>4994</th>
       <td>13</td>
       <td>139</td>
-      <td>0d4b67f458bb</td>
+      <td>312</td>
     </tr>
     <tr>
       <th>4995</th>
       <td>13</td>
       <td>139</td>
-      <td>0d4b67f458bb</td>
+      <td>312</td>
     </tr>
     <tr>
       <th>4996</th>
       <td>13</td>
       <td>139</td>
-      <td>0d4b67f458bb</td>
+      <td>312</td>
     </tr>
     <tr>
       <th>4997</th>
       <td>13</td>
       <td>139</td>
-      <td>0d4b67f458bb</td>
+      <td>312</td>
     </tr>
     <tr>
       <th>4998</th>
       <td>13</td>
       <td>139</td>
-      <td>0d4b67f458bb</td>
+      <td>312</td>
     </tr>
     <tr>
       <th>4999</th>
       <td>13</td>
       <td>139</td>
-      <td>0d4b67f458bb</td>
+      <td>312</td>
     </tr>
   </tbody>
 </table>
@@ -13114,386 +13421,29 @@ All images to array!
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>At this stage, we'll remove the vehicle ID from the labels to keep only make and model. It might be interesting later to add the vehicle ID to the training, to account for the repetitive number of photos from different angle. We'll keep it simple for now.</p>
-
+<h1 id="Training-the-model">Training the model<a class="anchor-link" href="#Training-the-model">&#182;</a></h1>
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[44]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">clean_y_train</span> <span class="o">=</span> <span class="n">clean_y_train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">clean_y_train</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[44]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>make</th>
-      <th>model</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>26</th>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>27</th>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>4970</th>
-      <td>4</td>
-      <td>152</td>
-    </tr>
-    <tr>
-      <th>4971</th>
-      <td>4</td>
-      <td>152</td>
-    </tr>
-    <tr>
-      <th>4972</th>
-      <td>4</td>
-      <td>152</td>
-    </tr>
-    <tr>
-      <th>4973</th>
-      <td>4</td>
-      <td>152</td>
-    </tr>
-    <tr>
-      <th>4974</th>
-      <td>4</td>
-      <td>152</td>
-    </tr>
-    <tr>
-      <th>4975</th>
-      <td>4</td>
-      <td>152</td>
-    </tr>
-    <tr>
-      <th>4976</th>
-      <td>17</td>
-      <td>93</td>
-    </tr>
-    <tr>
-      <th>4977</th>
-      <td>17</td>
-      <td>93</td>
-    </tr>
-    <tr>
-      <th>4978</th>
-      <td>17</td>
-      <td>93</td>
-    </tr>
-    <tr>
-      <th>4979</th>
-      <td>17</td>
-      <td>93</td>
-    </tr>
-    <tr>
-      <th>4980</th>
-      <td>17</td>
-      <td>93</td>
-    </tr>
-    <tr>
-      <th>4981</th>
-      <td>17</td>
-      <td>93</td>
-    </tr>
-    <tr>
-      <th>4982</th>
-      <td>17</td>
-      <td>93</td>
-    </tr>
-    <tr>
-      <th>4983</th>
-      <td>17</td>
-      <td>93</td>
-    </tr>
-    <tr>
-      <th>4984</th>
-      <td>17</td>
-      <td>93</td>
-    </tr>
-    <tr>
-      <th>4985</th>
-      <td>17</td>
-      <td>93</td>
-    </tr>
-    <tr>
-      <th>4986</th>
-      <td>17</td>
-      <td>93</td>
-    </tr>
-    <tr>
-      <th>4987</th>
-      <td>17</td>
-      <td>93</td>
-    </tr>
-    <tr>
-      <th>4988</th>
-      <td>17</td>
-      <td>93</td>
-    </tr>
-    <tr>
-      <th>4989</th>
-      <td>17</td>
-      <td>93</td>
-    </tr>
-    <tr>
-      <th>4990</th>
-      <td>17</td>
-      <td>93</td>
-    </tr>
-    <tr>
-      <th>4991</th>
-      <td>17</td>
-      <td>93</td>
-    </tr>
-    <tr>
-      <th>4992</th>
-      <td>13</td>
-      <td>139</td>
-    </tr>
-    <tr>
-      <th>4993</th>
-      <td>13</td>
-      <td>139</td>
-    </tr>
-    <tr>
-      <th>4994</th>
-      <td>13</td>
-      <td>139</td>
-    </tr>
-    <tr>
-      <th>4995</th>
-      <td>13</td>
-      <td>139</td>
-    </tr>
-    <tr>
-      <th>4996</th>
-      <td>13</td>
-      <td>139</td>
-    </tr>
-    <tr>
-      <th>4997</th>
-      <td>13</td>
-      <td>139</td>
-    </tr>
-    <tr>
-      <th>4998</th>
-      <td>13</td>
-      <td>139</td>
-    </tr>
-    <tr>
-      <th>4999</th>
-      <td>13</td>
-      <td>139</td>
-    </tr>
-  </tbody>
-</table>
-<p>5000 rows × 2 columns</p>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Train-data-on-new-graph">Train data on new graph<a class="anchor-link" href="#Train-data-on-new-graph">&#182;</a></h3>
+<h2 id="1.-With-make,-model-and-id">1. With make, model and id<a class="anchor-link" href="#1.-With-make,-model-and-id">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Reset-tensorflow-graph-data">Reset tensorflow graph data<a class="anchor-link" href="#Reset-tensorflow-graph-data">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[45]:</div>
+<div class="prompt input_prompt">In&nbsp;[108]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># reset underlying graph data</span>
@@ -13508,14 +13458,28 @@ All images to array!
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Define-network-architecture-and-train-model">Define network architecture and train model<a class="anchor-link" href="#Define-network-architecture-and-train-model">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="This-takes-around-25-mins-with-5000-images-on-a-batch-size-of-10-and-10-epoch">This takes around 25 mins with 5000 images on a batch size of 10 and 10 epoch<a class="anchor-link" href="#This-takes-around-25-mins-with-5000-images-on-a-batch-size-of-10-and-10-epoch">&#182;</a></h5>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">train_test_split</span>
-
-<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span><span class="o">.</span><span class="n">as_default</span><span class="p">():</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span><span class="o">.</span><span class="n">as_default</span><span class="p">():</span>
     
     <span class="c1"># split data into train and test sets</span>
     <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">clean_y_train</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">33</span><span class="p">)</span>
@@ -13538,32 +13502,40 @@ All images to array!
                          <span class="n">data_preprocessing</span><span class="o">=</span><span class="n">img_prep</span><span class="p">)</span>
     
     <span class="c1"># Step 1: Convolution</span>
-    <span class="c1"># NB: low level recognises edges and cruves, high level recognises beaks and paws </span>
-    <span class="n">network</span> <span class="o">=</span> <span class="n">conv_2d</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)</span> <span class="c1"># number of filters: 3, filter size 3 </span>
+    <span class="c1"># NB: low level recognises edges and cruves, high level recognises wheels, signs</span>
+    <span class="n">network</span> <span class="o">=</span> <span class="n">conv_2d</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)</span> <span class="c1"># number of filters: 3, filter size 3 </span>
     <span class="c1"># need downsampling to reduce the size of the image</span>
     
     <span class="c1"># Step 2: Max pooling</span>
     <span class="n">network</span> <span class="o">=</span> <span class="n">max_pool_2d</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># kernel size</span>
-                        
-    <span class="c1"># Step 6: Fully-connected 3 node neural network</span>
-    <span class="c1"># Looks at all images for each class and identify the high level features in common</span>
-    <span class="n">network</span> <span class="o">=</span> <span class="n">fully_connected</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)</span> <span class="c1"># number of outputs = number of classes the model has to choose from</span>
     
+    <span class="c1"># Step 3</span>
+    <span class="n">network</span> <span class="o">=</span> <span class="n">conv_2d</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)</span> <span class="c1"># number of filters: 3, filter size 3 </span>
+    
+    <span class="c1"># Step 4: Max pooling</span>
+    <span class="n">network</span> <span class="o">=</span> <span class="n">max_pool_2d</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># kernel size</span>
+                        
+    <span class="c1"># Step 5: Fully-connected 3 node neural network</span>
+    <span class="c1"># Looks at all images for each class and identify the high level features in common</span>
+    <span class="n">network</span> <span class="o">=</span> <span class="n">fully_connected</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)</span> <span class="c1"># number of outputs = number of classes the model has to choose from</span>
+    
+    <span class="c1"># Step 6: Regression</span>
     <span class="n">network</span> <span class="o">=</span> <span class="n">tflearn</span><span class="o">.</span><span class="n">regression</span><span class="p">(</span><span class="n">network</span><span class="p">)</span>
                              
     
     <span class="c1"># Wrap the network in a model object</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="n">tflearn</span><span class="o">.</span><span class="n">DNN</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="n">tensorboard_verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">checkpoint_path</span><span class="o">=</span><span class="s1">&#39;carclassifier.tfl.ckpt&#39;</span><span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">tflearn</span><span class="o">.</span><span class="n">DNN</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="n">tensorboard_verbose</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">tensorboard_dir</span> <span class="o">=</span><span class="s2">&quot;./tmp/tflearn_logs&quot;</span><span class="p">)</span>
     
-    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># batch size of 56 or even 10 is too much</span>
+    <span class="o">%</span><span class="k">time</span> model.fit(X_train, y_train, validation_set= (X_test, y_test), show_metric=True, batch_size=10) # batch size of 56 or even 10 is too much
     
     <span class="c1"># Save model when training is complete to a file</span>
     <span class="n">model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;carclassifier.tfl&quot;</span><span class="p">)</span>
     
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Network trained and saved as car-classifier.tfl!&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Network trained and saved as carclassifier.tfl!&quot;</span><span class="p">)</span>
     
     <span class="n">score</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-    <span class="c1"># accuracy 0.0040927695016418604</span>
+    <span class="c1"># accuracy: 0.94599999427795411</span>
+    <span class="c1"># loss: 363.87445</span>
     
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Accuracy of the model: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">score</span><span class="p">))</span>
 </pre></div>
@@ -13582,8 +13554,8 @@ All images to array!
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Training Step: 2082  | total loss: <span class="ansi-green-intense-fg ansi-bold">213.19269</span> | time: 8.459s
-| Adam | epoch: 002 | loss: 213.19269 -- iter: 0164/4000
+<pre>Training Step: 964  | total loss: <span class="ansi-green-intense-fg ansi-bold">3768.37305</span> | time: 66.023s
+| Adam | epoch: 003 | loss: 3768.37305 - acc: 0.0528 -- iter: 1640/4000
 </pre>
 </div>
 </div>
@@ -13596,7 +13568,7 @@ All images to array!
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Evaluate-the-performance-of-the-model">Evaluate the performance of the model<a class="anchor-link" href="#Evaluate-the-performance-of-the-model">&#182;</a></h3>
+<h3 id="Test-on-a-single-image">Test on a single image<a class="anchor-link" href="#Test-on-a-single-image">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -13605,38 +13577,419 @@ All images to array!
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">precision_score</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">,</span> <span class="n">f1_score</span><span class="p">,</span> <span class="n">cohen_kappa_score</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># choose a number between 0 and 1000 (size of the test set)</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
 
-<span class="c1"># predict values</span>
-<span class="n">img</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span><span class="mi">450</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+</div>
+</div>
+</div>
 
-<span class="n">X_test</span>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># revert type to uint8 to see image</span>
+<span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">),</span> <span class="s1">&#39;RGB&#39;</span><span class="p">)</span> 
+</pre></div>
 
-<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_label</span><span class="p">(</span><span class="n">X_test</span><span class="p">[:</span><span class="mi">80</span><span class="p">])</span> <span class="c1"># cannot handle more (memory load)</span>
+</div>
+</div>
+</div>
 
-<span class="n">y_pred</span>
-<span class="n">y_test</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># A copy is made here in case something goes wrong and we lose X_test.</span>
+<span class="n">X_test_copy</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># revert the dictionnary for fast query</span>
+<span class="n">numbertomakedict</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">maketonumberdict</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+<span class="n">numbertomodeldict</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">modeltonumberdict</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+<span class="c1"># Model prediciton</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_label</span><span class="p">(</span><span class="n">X_test_copy</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Make: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">numbertomakedict</span><span class="p">[</span><span class="n">y_pred</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Model: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">numbertomodeldict</span><span class="p">[</span><span class="n">y_pred</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]]))</span>
+
+<span class="c1"># Actual answer</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The actual answer is: </span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">numbertomakedict</span><span class="p">[</span><span class="n">y_test</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]],</span> <span class="n">numbertomodeldict</span><span class="p">[</span><span class="n">y_test</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]]))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Evaluate-performance-of-model-for-car-make">Evaluate performance of model for car make<a class="anchor-link" href="#Evaluate-performance-of-model-for-car-make">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>There is not enough memory in the NVIDIA graphics card I am using to apply model.predict_label() to all 1000 images of the test set (X_test, y_test). The maximum number of images I can use here is 75.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># make a prediction for the first 75 vehicles</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_label</span><span class="p">(</span><span class="n">X_test_copy</span><span class="p">[:</span><span class="mi">75</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># get only the make</span>
+<span class="n">make_true</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">y_test</span><span class="p">[:</span><span class="mi">75</span><span class="p">]]</span>
+<span class="n">make_pred</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">y_pred</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Confusion matrix</span>
+<span class="n">confusion_matrix</span><span class="p">(</span><span class="n">make_true</span><span class="p">,</span> <span class="n">make_pred</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Precision (total ratio of tp/(tp + fp))</span>
+<span class="n">precision_score</span><span class="p">(</span><span class="n">make_true</span><span class="p">,</span> <span class="n">make_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;micro&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Recall</span>
+<span class="n">recall_score</span><span class="p">(</span><span class="n">make_true</span><span class="p">,</span> <span class="n">make_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;micro&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># F1 score</span>
+<span class="n">f1_score</span><span class="p">(</span><span class="n">make_true</span><span class="p">,</span> <span class="n">make_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;micro&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Cohen&#39;s kappa</span>
+<span class="n">cohen_kappa_score</span><span class="p">(</span><span class="n">make_true</span><span class="p">,</span> <span class="n">make_pred</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="2.-With-make-and-model-only">2. With make and model only<a class="anchor-link" href="#2.-With-make-and-model-only">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>At this stage, we'll remove the vehicle ID from the labels to keep only make and model. It might be interesting later to add the vehicle ID to the training, to account for the repetitive number of photos from different angle. We'll keep it simple for now.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">clean_y_train</span> <span class="o">=</span> <span class="n">clean_y_train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">clean_y_train</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Reset-underlying-graph">Reset underlying graph<a class="anchor-link" href="#Reset-underlying-graph">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># reset underlying graph data</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">reset_default_graph</span><span class="p">()</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">get_default_graph</span><span class="p">()</span><span class="o">.</span><span class="n">get_operations</span><span class="p">()</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;C:/Users/mednche/Desktop/ImageRec/&quot;</span><span class="p">)</span> <span class="c1"># change directory to save checkpoint of model</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Define-network-architecture-and-train-model">Define network architecture and train model<a class="anchor-link" href="#Define-network-architecture-and-train-model">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span><span class="o">.</span><span class="n">as_default</span><span class="p">():</span>
+    
+    <span class="c1"># split data into train and test sets</span>
+    <span class="n">X_train2</span><span class="p">,</span> <span class="n">X_test2</span><span class="p">,</span> <span class="n">y_train2</span><span class="p">,</span> <span class="n">y_test2</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">clean_y_train</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">33</span><span class="p">)</span>
+    
+    <span class="c1"># trainx and trainy should be numpy arrays</span>
+    <span class="n">y_train2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_train2</span><span class="p">)</span>
+    <span class="n">y_test2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_test2</span><span class="p">)</span>
+    
+    <span class="c1"># Make sure the data is normalized</span>
+    <span class="n">img_prep</span> <span class="o">=</span> <span class="n">ImagePreprocessing</span><span class="p">()</span>
+    <span class="n">img_prep</span><span class="o">.</span><span class="n">add_featurewise_zero_center</span><span class="p">()</span>
+    <span class="n">img_prep</span><span class="o">.</span><span class="n">add_featurewise_stdnorm</span><span class="p">()</span>
 
 
-<span class="n">im</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">folder</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">train_files</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="c1">### Define our network architecture:</span>
+    
+    <span class="c1"># Input is a tensor: height*width images with 3 color channels (red, green and blue) </span>
+    
+    <span class="n">network</span> <span class="o">=</span> <span class="n">input_data</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">image_height</span><span class="p">,</span> <span class="n">image_width</span><span class="p">,</span> <span class="n">channels</span><span class="p">],</span>
+                         <span class="n">data_preprocessing</span><span class="o">=</span><span class="n">img_prep</span><span class="p">)</span>
+    
+    <span class="c1"># Step 1: Convolution</span>
+    <span class="c1"># NB: low level recognises edges and cruves, high level recognises wheels, signs</span>
+    <span class="n">network</span> <span class="o">=</span> <span class="n">conv_2d</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)</span> <span class="c1"># number of filters: 3, filter size 3 </span>
+    <span class="c1"># need downsampling to reduce the size of the image</span>
+    
+    <span class="c1"># Step 2: Max pooling</span>
+    <span class="n">network</span> <span class="o">=</span> <span class="n">max_pool_2d</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># kernel size</span>
+    
+    <span class="c1"># Step 3</span>
+    <span class="n">network</span> <span class="o">=</span> <span class="n">conv_2d</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)</span> <span class="c1"># number of filters: 3, filter size 3 </span>
+    
+    <span class="c1"># Step 4: Max pooling</span>
+    <span class="n">network</span> <span class="o">=</span> <span class="n">max_pool_2d</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># kernel size</span>
+                        
+    <span class="c1"># Step 5: Fully-connected 2 node neural network</span>
+    <span class="c1"># Looks at all images for each class and identify the high level features in common</span>
+    <span class="n">network</span> <span class="o">=</span> <span class="n">fully_connected</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)</span> <span class="c1"># number of outputs = number of classes the model has to choose from</span>
+    
+    <span class="c1"># Step 6: Regression</span>
+    <span class="n">network</span> <span class="o">=</span> <span class="n">tflearn</span><span class="o">.</span><span class="n">regression</span><span class="p">(</span><span class="n">network</span><span class="p">)</span>
+                             
+    
+    <span class="c1"># Wrap the network in a model object</span>
+    <span class="n">model2</span> <span class="o">=</span> <span class="n">tflearn</span><span class="o">.</span><span class="n">DNN</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="n">tensorboard_verbose</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">tensorboard_dir</span> <span class="o">=</span><span class="s2">&quot;./tmp/tflearn_logs&quot;</span><span class="p">)</span>
+    
+    <span class="o">%</span><span class="k">time</span> model2.fit(X_train2, y_train2, validation_set= (X_test2, y_test2), show_metric=True, batch_size=10) # batch size of 56 or even 10 is too much
+    
+    <span class="c1"># Save model when training is complete to a file</span>
+    <span class="n">model2</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;carclassifier2.tfl&quot;</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Network trained and saved as carclassifier2.tfl!&quot;</span><span class="p">)</span>
+    
+    <span class="n">score</span> <span class="o">=</span> <span class="n">model2</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">X_test2</span><span class="p">,</span> <span class="n">y_test2</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="c1"># accuracy:</span>
+    <span class="c1"># loss: </span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Accuracy of the model: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">score</span><span class="p">))</span>
+</pre></div>
 
+</div>
+</div>
+</div>
 
-<span class="c1"># Confusion matrix</span>
-<span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Evaluate-the-performance-of-the-model-for-car-make">Evaluate the performance of the model for car make<a class="anchor-link" href="#Evaluate-the-performance-of-the-model-for-car-make">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">X_test_copy2</span> <span class="o">=</span> <span class="n">X_test2</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
-<span class="c1"># Precision </span>
-<span class="n">precision_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="c1"># make a prediciton for the first 75 vehicles</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model2</span><span class="o">.</span><span class="n">predict_label</span><span class="p">(</span><span class="n">X_test_copy2</span><span class="p">[:</span><span class="mi">75</span><span class="p">])</span>
+</pre></div>
 
-<span class="c1"># Recall</span>
-<span class="n">recall_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+</div>
+</div>
+</div>
 
-<span class="c1"># F1 score</span>
-<span class="n">f1_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="n">y_pred</span><span class="p">)</span>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># get only the make</span>
+<span class="n">make_true</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">y_test</span><span class="p">[:</span><span class="mi">75</span><span class="p">]]</span>
+<span class="n">make_pred</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">y_pred</span><span class="p">]</span>
+</pre></div>
 
-<span class="c1"># Cohen&#39;s kappa</span>
-<span class="n">cohen_kappa_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Confusion matrix</span>
+<span class="n">confusion_matrix</span><span class="p">(</span><span class="n">make_true</span><span class="p">,</span> <span class="n">make_pred</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> <span class="c1"># Precision (total ratio of tp/(tp + fp))</span>
+<span class="n">precision_score</span><span class="p">(</span><span class="n">make_true</span><span class="p">,</span> <span class="n">make_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;micro&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Recall</span>
+<span class="n">recall_score</span><span class="p">(</span><span class="n">make_true</span><span class="p">,</span> <span class="n">make_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;micro&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># F1 score</span>
+<span class="n">f1_score</span><span class="p">(</span><span class="n">make_true</span><span class="p">,</span> <span class="n">make_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;micro&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Cohen&#39;s kappa</span>
+<span class="n">cohen_kappa_score</span><span class="p">(</span><span class="n">make_true</span><span class="p">,</span> <span class="n">make_pred</span><span class="p">)</span>
 </pre></div>
 
 </div>
