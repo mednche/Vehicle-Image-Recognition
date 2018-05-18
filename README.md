@@ -24,13 +24,17 @@ The first step is to install a graphics card and the corresponding drivers on yo
 3. Then CuDNN (CUDA Deep Neural Network library) needs to be downloaded and "installed".
 
 4. Install TensorFlow-gpu and tflearn in an Anaconda environment running Python 3.5 
-
 ```
 conda install -c anaconda tensorflow-gpu
 python -m pip install tflearn
 ```
-
-5. Install additional libraries
+5. Install tensorboard (depending of your version of Tensorflow. I had do the following)
+```
+pip uninstall tensorflow-tensorboard
+pip install tensorboard
+pip install --upgrade tensorboard
+```
+6. Install additional libraries
 ```
 conda install matplotlib
 conda install pandas
@@ -59,7 +63,10 @@ Input -> Conv -> Relu -> Pool -> Conv -> Relu -> Pool -> FullyConnected -> Regre
 - *number of iterations* = number of passes, each pass using [batch size] number of images. 
 To be clear, one pass = one forward pass + one backward pass (the forward pass and backward pass are not counted as two different passes).
 
-
+## Visualise the performances of the model using Tensorboard
+```
+tensorboard --logdir=''
+```
 ## Improvement
 
 Some make and models of vehicle in the dataset don't have many images to train the model on. A good solution is to use Data Augmentation Techniques. One example of this is to shift a given image left by 1 pixel. To the computer, this shift can be fairly significant in the terms of the pixels in the array. The classification (label) of the image doesn’t change, but the array does. There are many other ways to artificially expand a dataset. Some popular augmentations people use are grayscales, horizontal flips, vertical flips, random crops, color jitters, translations, rotations, and much more.
