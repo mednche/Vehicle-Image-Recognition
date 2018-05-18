@@ -8,7 +8,7 @@ The [dataset](https://www.kaggle.com/c/6927/download/test.zip) for this project 
 The final merged dataset contains **105,152 vehicle images** of identical size (1918 x 1280). The dataset is too big to be uploaded on github. This correspond to a total of **6,572 different vehicles** in the dataset, each of them containing 16 photos of the car, taken from different angles. An example of two vehicles (with their 16 images each) is provided in this repository.
 
 <p align="center">
-  <img src="/images/car.jpg" height="300">
+  <img src="initial_uncropped.jpg" height="300">
 </p>
 
 
