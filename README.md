@@ -52,28 +52,34 @@ From here, the next steps are all in the Jupyter notebook called ***ImageRecogni
 
 ## Data pre-processing
 
-The images in the dataset are very big (1918 x 1280). This is causing memory issues for the model. The images were thus resized to something more managable that nonetheless allows the visual recognition of a car make and model (450 x 250). The top part of the image displaying the name of the used car dealers company was cropped.
+- The images in the dataset are very big (1918 x 1280). This is causing memory issues for the model. The images were thus resized to something more managable that nonetheless allows the visual recognition of a car make and model (450 x 250). The top part of the image displaying the name of the used car dealers company was cropped.
 
 <p align="center">
   <img src="cropped_car.jpg">
 </p>
 
 
-The labels in the metadat.csv are strings ("Acura", "TL"). These need to be converted to integers for the neural network.
+- The labels in 'metadata.csv' are strings ("Acura", "TL"). These need to be converted to integers for the neural network. This is done in the section called "Recode car labels (make, model, id) into numbers instead of strings".
 
 ## Training the network
 
-Architecture of the neural network:
+I have trained two models with the same architecture (see below). 
+- Model 1 takes make, model and vehicle ID in input
+- Model 2 only takes make and model in input
+
+
+**Architecture of the neural network:**
 
 Input -> Conv -> Relu -> Pool -> Conv -> Relu -> Pool -> FullyConnected -> Regression
 
 This architecture is rather commonly used in deep learning.
 
 **Neural network terminology:**
-- *one epoch* = one forward pass and one backward pass of all the training images
-- *batch size* = the number of training images in one forward/backward pass. The higher the batch size, the more memory space needed, but it will be faster.
-- *number of iterations* = number of passes, each pass using [batch size] number of images. 
+- *One epoch* = one forward pass and one backward pass of all the training images
+- *Batch size* = the number of training images in one forward/backward pass. The higher the batch size, the more memory space needed, but it will be faster.
+- *Number of iterations* = number of passes, each pass using [batch size] number of images. 
 To be clear, one pass = one forward pass + one backward pass (the forward pass and backward pass are not counted as two different passes).
+
 
 ## Visualise the performances of the model using Tensorboard
 
