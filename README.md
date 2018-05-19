@@ -3,7 +3,7 @@
 This script trains a convolutional neural network model to recognise a vehicle's make and model. This was done using Google's [Tensorflow](https://www.tensorflow.org/) and [TFlearn](http://tflearn.org/), a deep learning library built on top of Tensorflow. 
 
 ## Dataset
-The [dataset](https://www.kaggle.com/c/6927/download/test.zip) for this project was downloaded on [Kaggle](https://www.kaggle.com/c/carvana-image-masking-challenge/data). On Kaggle, there are two folders called Train and Test. They both have to be unziped before working on them. After checking that there is not overlap between the images in both folders, I combined them into a new single folder called 'Merged' in order to increase the training size. See script ***mergeFolders.py*** to see how I merged them.
+The [dataset](https://www.kaggle.com/c/6927/download/test.zip) for this project was downloaded on [Kaggle](https://www.kaggle.com/c/carvana-image-masking-challenge/data). On Kaggle, there are two folders called Train and Test. They both have to be unziped before working on them. After checking that there is not overlap between the images in both folders, I combined them into a new single folder called 'Test' in order to increase the training size. See script ***mergeFolders.py*** to see how I merged them.
 
 The final merged dataset contains **105,152 vehicle images** of identical size (1918 x 1280). The dataset is too big to be uploaded on github. This correspond to a total of **6,572 different vehicles** in the dataset, each of them containing 16 photos of the car, taken from different angles. An example of two vehicles (with their 16 images each) is provided in this repository.
 
