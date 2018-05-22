@@ -91,7 +91,7 @@ tensorboard --logdir='/tmp/tflearn_logs/HF0NPV/'
 
 Some make and models of vehicle in the dataset don't have many images to train the model on. A good solution is to use Data Augmentation Techniques. One example of this is to shift a given image left by 1 pixel. To the computer, this shift can be fairly significant in the terms of the pixels in the array. The classification (label) of the image doesn’t change, but the array does. There are many other ways to artificially expand a dataset. Some popular augmentations people use are grayscales, horizontal flips, vertical flips, random crops, color jitters, translations, rotations, and much more.
 
-It might be also be useful to trasnform the images into a greyscale prior to running the model. This way, instead of 3 channels (RGB), the model would be dealing with 1 channel (level of grey). Although I have seen that people don't see much improvement on greyscale.
+It might be also be useful to transform the images into a greyscale prior to running the model. This way, instead of 3 channels (RGB), the model would be dealing with 1 channel (level of grey). Although I have seen that people don't see much improvement on greyscale.
 
 ## Limitations
 
