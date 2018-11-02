@@ -97,7 +97,5 @@ It might be also be useful to transform the images into a greyscale prior to run
 
 Due to the limited available bandwidth on the graphics card used, I have not been able to run the model on the full dataset, which is necessary to obtain good learning performances and subsequent accurate prediction. Given the deadline I was given, I am submitting the current work in progress. However, I am due to receive a powerful grahics card (NVIDIA GeForce 800 Ti) in a few weeks and will then be able to run the network on the full dataset.
 
-overfitting the training samples when the dataset is small (very high training accuracy, low test accuracy). As you grow the dataset size, your classifier starts to generalize better, thus raising the success rate in the test dataset.
-
 Given the small dataset, the model is overfitting the training samples (very high training accuracy, low test accuracy). As I will grow the dataset size, the classifier will hopefully start to generalize better, thus raising the success rate in the test dataset.
 
