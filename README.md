@@ -21,7 +21,7 @@ This model is computationally demanding and requires to use TensorFlow on GPU (a
 I followed [this tutorial](https://www.codingforentrepreneurs.com/blog/install-tensorflow-gpu-windows-cuda-cudnn/) to install TensorFlow. 
 NB: TensorFlow-GPU runs on **Python 3.5** (but not for above versions as of 17/05/2018).
 
-1. Instal graphics card:
+1. Install graphics card:
 The first step is to install a graphics card and the corresponding drivers on your computer
 
 2. Then CUDA needs to be installed. CUDA is a parallel computing platform and application programming interface model created by Nvidia. 
